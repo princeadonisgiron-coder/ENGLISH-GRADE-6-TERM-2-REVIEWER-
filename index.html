@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Super Reader Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8f6ff;--card:#fff;--tx:#2b2a4c;--mut:#5d5b82;--bd:#d6e6f5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d2140;--card:#2a2f57;--tx:#f4f3ff;--mut:#b9b8e0;--bd:#3d4375;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d2140;--card:#2a2f57;--tx:#f4f3ff;--mut:#b9b8e0;--bd:#3d4375;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 Fredoka,"Trebuchet MS","Comic Sans MS",sans-serif;overflow-x:hidden}
+.cl{position:fixed;font-size:60px;opacity:.5;animation:fl 30s linear infinite;pointer-events:none;z-index:0}
+@keyframes fl{from{transform:translateX(-120px)}to{transform:translateX(110vw)}}
+@keyframes bo{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+@keyframes fy{from{transform:translateY(0) rotate(0);opacity:1}to{transform:translateY(-180px) rotate(360deg);opacity:0}}
+@keyframes gr{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rg{0%,100%{transform:scale(.6);opacity:.9}50%{transform:scale(1);opacity:.4}}
+.app{position:relative;z-index:1;max-width:980px;margin:auto;padding:16px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.owl{font-size:56px;animation:bo 2s ease-in-out infinite;cursor:pointer}
+h1{margin:0;font-size:1.9rem;line-height:1.1}header p{margin:0;color:var(--mut)}
+.st{margin-left:auto;background:var(--card);border:3px solid #fbbf24;border-radius:30px;padding:6px 16px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:18px}
+.tc{border:0;border-radius:22px;padding:16px;color:#fff;text-align:left;cursor:pointer;font:inherit;font-weight:600;font-size:1.02rem;box-shadow:0 6px 0 rgba(0,0,0,.2);animation:pop .5s backwards;transition:transform .15s}
+.tc:hover{transform:translateY(-4px) rotate(-1deg)}.tc:active{transform:translateY(3px)}
+.tc i{display:block;font-style:normal;font-size:2.4rem;animation:wig 3s infinite}.tc small{display:block;font-weight:400;opacity:.95}
+.mix{background:#7c3aed}
+.pg{background:var(--card);border-radius:26px;border:4px solid var(--c);padding:20px;margin-top:14px;animation:pop .4s}
+.bk{border:0;background:var(--card);color:var(--tx);padding:8px 16px;border-radius:20px;font:inherit;cursor:pointer;border:2px solid var(--bd)}
+h2{margin:10px 0;font-size:1.7rem;color:var(--c)}
+.big{background:var(--c);color:#fff;border-radius:18px;padding:14px;font-size:1.1rem}
+.tabs{display:flex;gap:8px;margin:14px 0}
+.tabs button{flex:1;padding:10px;border-radius:16px;border:3px solid var(--c);background:none;color:var(--c);font:inherit;font-weight:600;cursor:pointer}
+.tabs .on{background:var(--c);color:#fff}
+h3{margin:18px 0 6px}
+.pt{background:var(--bd);border-radius:14px;padding:10px 14px;margin:8px 0;animation:pop .4s backwards}
+.ex{background:#fef08a;color:#3a3200;border-radius:6px;padding:10px 14px;margin:8px 0;transform:rotate(-.7deg);box-shadow:3px 3px 0 rgba(0,0,0,.15);animation:pop .4s backwards}
+.ex:nth-child(even){transform:rotate(.7deg)}
+.tip{border:3px dashed var(--c);border-radius:16px;padding:12px;margin-top:14px}
+.gfx{display:flex;flex-direction:column;align-items:center;gap:4px;margin:12px 0}
+.gfx b{display:block;width:240px;text-align:center;color:#fff;padding:8px;border-radius:30px 30px 8px 8px;transform-origin:left;animation:gr 1s backwards}
+.rings{position:relative;height:150px;display:flex;justify-content:center;align-items:center}
+.rings s{position:absolute;border:4px solid var(--c);border-radius:50%;animation:rg 3s infinite;text-decoration:none}
+.q{border:3px solid var(--bd);border-radius:18px;padding:14px;margin:12px 0}.q p{margin:0 0 8px;font-weight:600}
+.o{display:block;width:100%;text-align:left;padding:10px 14px;margin:7px 0;border:3px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:14px;cursor:pointer;font:inherit}
+.o:hover{border-color:var(--c)}
+.o.ok{background:#bbf7d0;border-color:#16a34a;color:#14532d;animation:bo .5s}.o.no{background:#fecaca;border-color:#dc2626;color:#7f1d1d;animation:wig .4s}
+.why{margin-top:6px;color:var(--mut)}
+.sc{font-size:1.3rem;text-align:center;background:#fef08a;color:#3a3200;border-radius:18px;padding:14px;animation:pop .5s}
+.sc button{margin-top:8px;padding:8px 18px;border:0;border-radius:20px;background:var(--c);color:#fff;font:inherit;cursor:pointer}
+.cf{position:fixed;font-size:28px;animation:fy 1.4s forwards;pointer-events:none;z-index:9}
+</style></head><body>
+<span class="cl" style="top:8%">☁️</span><span class="cl" style="top:40%;animation-delay:-12s;animation-duration:42s">☁️</span><span class="cl" style="top:75%;animation-delay:-22s">⭐</span>
+<div class="app"><header><div class="owl" id="owl">🦉</div><div><h1>Super Reader Reviewer</h1><p id="hi">Tap a card to start learning!</p></div><div class="st">⭐ <span id="stars">0</span></div></header><div id="main"></div></div>
+<script>
+const T=[
+{e:"🔍",c:"#e11d48",t:"Fact vs. Opinion",b:"A fact can be proven. An opinion is what someone thinks or feels.",
+p:["<b>Fact</b>: true or false, and you can check it (numbers, dates, records).","<b>Opinion</b>: a belief or feeling. Clue words: best, worst, should, I think, beautiful, boring.","<b>Fact-based opinion</b>: an opinion backed up by facts, often using “because”."],
+x:["Fact: “The Philippines has more than 7,000 islands.”","Opinion: “Mangoes are the yummiest fruit.”","Fact-based opinion: “Our school needs a bigger library because 300 students share only 2 shelves.”"],
+m:"Ask: “Can I prove it?” Yes = fact. No = opinion. Opinion + proof = fact-based opinion!",
+q:[["“Water boils at 100°C.” is a…",["Fact","Opinion","Fact-based opinion"],0,"You can test it, so it is a fact."],["“Math is the most boring subject.” is a…",["Fact","Opinion","Fact-based opinion"],1,"“Most boring” is a feeling. People disagree."],["Which is a fact-based opinion?",["I hate rainy days.","Kids should read daily because reading improves vocabulary.","Today is Monday."],1,"It gives an opinion (“should”) plus a reason."]]},
+{e:"📝",c:"#ea580c",t:"Summarizing Informational Texts",b:"A summary tells only the most important ideas, short and in your own words.",
+p:["Find the <b>main idea</b> (what the whole text is about).","Pick the <b>key details</b> that support it.","Leave out small details, examples, and your own opinions.","Use your own words and keep the same order."],
+x:["Text: a long article on how bees make honey. Summary: “Bees collect nectar, store it in the hive, and turn it into honey.”","Too long: copying three paragraphs. Too short: “Bees.”"],
+m:"Use Somebody-Wanted-But-So, or answer Who? What? When? Where? Why? Then squeeze it into 2–3 sentences.",
+q:[["A good summary is…",["Copied word for word","Short and in your own words","Full of your opinions"],1,"Summaries are brief and reworded."],["Which should be left out of a summary?",["Main idea","Tiny details","Key details"],1,"Only the big ideas stay."],["What do you find first?",["The main idea","The longest sentence","The author’s name"],0,"Everything else supports the main idea."]]},
+{e:"🥪",c:"#ca8a04",t:"Introduction, Body, Conclusion",b:"Good writing is like a sandwich: top bun, yummy filling, bottom bun!",
+p:["<b>Introduction</b>: a hook to grab the reader, the topic, and your main point (thesis).","<b>Body</b>: each paragraph has one idea, details, and linking words (first, next, also).","<b>Conclusion</b>: restate the main point and end with a final thought. No new big ideas!"],
+x:["Hook: “Have you ever wondered why the sky turns orange at sunset?”","Linking words: first, then, moreover, finally.","Closing: “That is why every sunset is a tiny science show.”"],
+m:"Tell them what you will say, say it, then tell them what you said.",
+g:'<div class="gfx"><b style="background:#f59e0b">🍞 Introduction</b><b style="background:#16a34a;animation-delay:.4s;border-radius:8px">🥬 Body</b><b style="background:#f59e0b;animation-delay:.8s;border-radius:8px 8px 30px 30px">🍞 Conclusion</b></div>',
+q:[["Your thesis goes in the…",["Introduction","Body","Conclusion"],0,"The intro states your main point."],["Each body paragraph has…",["Many ideas","One main idea with details","Only a question"],1,"One idea per paragraph keeps it clear."],["A conclusion should…",["Add a new topic","Restate the main point and end well","Be skipped"],1,"It wraps things up neatly."]]},
+{e:"💪",c:"#16a34a",t:"Evidence: Narrative & Persuasive",b:"Evidence is the proof that makes your writing believable.",
+p:["<b>Persuasive</b> evidence: facts, statistics, expert quotes, real examples.","<b>Narrative</b> evidence: sensory details, actions, and dialogue that show feelings and events.","Good evidence is <b>relevant, accurate, and enough</b>."],
+x:["Persuasive: “School gardens help. A 2020 study found students ate 30% more vegetables.”","Narrative: instead of “She was scared,” write “Her hands shook and her voice cracked.”"],
+m:"Persuasive = prove it. Narrative = show it.",
+q:[["Best evidence in a persuasive essay?",["A rumor","A statistic from a trusted study","A guess"],1,"Reliable facts convince readers."],["In a story, “His knees trembled” is…",["A statistic","A sensory detail that shows fear","An opinion poll"],1,"It shows feelings through action."],["Good evidence should be…",["Relevant and accurate","Long and loud","Only funny"],0,"It must fit the claim and be true."]]},
+{e:"📢",c:"#9333ea",t:"Propaganda: Testimonial, Plain Folks, Bandwagon",b:"Propaganda tricks use feelings to make you agree or buy something.",
+p:["<b>Testimonial</b>: a famous or trusted person says to use it.","<b>Plain folks</b>: the speaker acts like an ordinary person, “just like you.”","<b>Bandwagon</b>: “Everybody is doing it, so you should too!”"],
+x:["Testimonial: a pop star holds up a soft drink.","Plain folks: a politician wears a farmer’s hat and says, “I’m one of you.”","Bandwagon: “Join the 5 million kids already using this app!”"],
+m:"Celebrity = Testimonial. Ordinary = Plain folks. Crowd = Bandwagon.",
+q:[["“Everyone in Grade 6 owns this! Get yours!”",["Testimonial","Plain folks","Bandwagon"],2,"It pushes you to follow the crowd."],["A famous singer recommends a shampoo.",["Testimonial","Plain folks","Bandwagon"],0,"A well-known person endorses it."],["A mayor eats at a roadside stall and says, “I’m just a regular guy.”",["Testimonial","Plain folks","Bandwagon"],1,"Acting ordinary to be trusted."]]},
+{e:"🧐",c:"#0891b2",t:"Author’s POV/Stand & Propaganda",b:"The author’s stand is the side they take. Clues hide in the words they choose.",
+p:["Look at <b>word choice</b>: loaded words like “terrible” or “wonderful” show feelings.","Check what is <b>included or left out</b> and the author’s <b>tone</b>.","Ask who the audience is and what the author wants you to think, feel, or do."],
+x:["“The shameful new rule hurts our kids.” (strong negative stand)","“The new rule changes recess to 20 minutes.” (neutral)"],
+m:"Detective question: “Why did the author pick THESE words?”",
+q:[["“Brilliant, amazing plan!” shows…",["A neutral tone","A positive stand","No opinion"],1,"Strong positive words show approval."],["One-sided evidence may signal…",["Bias or propaganda","A summary","Neutrality"],0,"Ignoring other views is a warning sign."],["To find the stand, study…",["Word choice and tone","Page numbers","The cover color"],0,"Words and tone reveal the author’s side."]]},
+{e:"🙋",c:"#db2777",t:"Non-Verbal Cues",b:"We “talk” with our bodies even without words!",
+p:["<b>Facial expressions</b>, <b>gestures</b>, <b>eye contact</b>, <b>posture</b> show feelings.","<b>Haptics</b>: touch (handshake, high-five, pat on the back).","<b>Proxemics</b>: use of space and distance.","<b>Blocking</b>: where actors stand and move on stage."],
+x:["Crossed arms and a frown can mean “I’m upset.”","Standing close to a friend, but far from a stranger = proxemics.","An actor steps downstage to show the hero is important = blocking."],
+m:"Haptics = Hands/touch. Proxemics = Pretty close or far. Blocking = Stage positions.",
+g:'<div class="rings" style="--c:#db2777"><s style="width:140px;height:140px"></s><s style="width:90px;height:90px;animation-delay:.5s"></s><span style="font-size:36px;position:relative">🧍</span></div>',
+q:[["Proxemics is about…",["Touch","Distance and space","Voice"],1,"How near or far people stand."],["A handshake is…",["Haptics","Blocking","Proxemics"],0,"Haptics means communication by touch."],["Where actors move on stage is…",["Haptics","Blocking","Posture"],1,"Blocking plans stage positions."]]},
+{e:"📋",c:"#4f46e5",t:"Simple Survey Forms",b:"A survey is a set of questions that collects people’s answers.",
+p:["<b>Open-ended (printed)</b>: people write their own answers.","<b>Interview (oral)</b>: you ask aloud and write down the answers.","Questions should be short, clear, fair, and fit your purpose."],
+x:["Open-ended: “What do you like about our canteen?” ______","Interview: “Which subject do you enjoy most, and why?”","Unfair (leading): “Don’t you agree our canteen is great?”"],
+m:"Print = write it. Interview = say it. Never lead the answer!",
+q:[["“Why do you like reading?” is…",["Open-ended","A yes/no question","Leading"],0,"It lets people explain freely."],["An oral survey is also called…",["A print form","An interview","A poster"],1,"You ask the questions aloud."],["Which question is unfair?",["What is your favorite food?","Don’t you think pizza is the best?","How often do you eat lunch?"],1,"It pushes people to agree."]]},
+{e:"🎨",c:"#0d9488",t:"Visual Elements",b:"Pictures, colors, and layouts carry meaning, so read them like words!",
+p:["<b>Purpose</b>: to inform, persuade, or entertain.","<b>Contribution to meaning</b>: how color, image, size, and layout add to the message.","<b>Cultural appropriateness</b>: respectful of customs, beliefs, and symbols."],
+x:["Red + big letters on a sign = danger or urgent.","A poster of green leaves supports a message about nature.","An image that mocks a tradition is not culturally appropriate."],
+m:"Ask 3 questions: Why made? What does it add? Is it respectful?",
+q:[["A poster to convince people has the purpose to…",["Persuade","Hide","Confuse"],0,"Convincing is persuading."],["Checking if a picture respects customs is judging…",["Cultural appropriateness","Font size","Length"],0,"It must respect the audience’s culture."],["Bold red letters help the message by…",["Adding meaning like urgency","Being random","Hiding it"],0,"Color and size add meaning."]]},
+{e:"🖼️",c:"#f97316",t:"Creating Visual Text",b:"Visual texts such as posters and infographics tell a message with pictures plus words.",
+p:["Examples: posters, infographics, comics, brochures, slogans.","Plan first: audience, purpose, key message.","Use big readable letters, matching colors, and one clear focal point."],
+x:["Poster slogan: “Save water, save life!” with a big water-drop picture.","Infographic: icons and numbers about recycling."],
+m:"Keep it simple: one message, few words, bold picture.",
+q:[["First step before making a poster?",["Decorate","Know your audience and purpose","Print"],1,"Planning comes first."],["An infographic mixes…",["Text and visuals","Only sound","Only color"],0,"Facts plus pictures."],["The focal point is…",["The main eye-catching part","The border","A footnote"],0,"It’s where the eye goes first."]]},
+{e:"🎬",c:"#dc2626",t:"Multimedia Elements",b:"Videos, TV ads, and animation mix pictures, sound, and words to get your attention.",
+p:["<b>Video clips/TV ads</b>: images, music, sound effects, dialogue, camera shots, on-screen text.","<b>2D animation</b>: flat drawn movement, like cartoons.","<b>3D animation</b>: computer models with depth, like modern animated films."],
+x:["Upbeat music in an ad makes you feel happy about the product.","A close-up shot shows a snack’s crunchy details.","Pixar-style movies use 3D animation."],
+m:"2D = flat (length + width). 3D = deep (adds depth).",
+q:[["Which has depth and a lifelike look?",["2D animation","3D animation","A printed flyer"],1,"3D adds depth."],["Ads use music to…",["Set the mood","Replace all pictures","Hide the product"],0,"Music shapes feelings."],["A close-up is a type of…",["Camera shot","Survey","Slogan"],0,"Camera shots are video elements."]]},
+{e:"🎥",c:"#2563eb",t:"Creating Multimedia Text",b:"Build your own project by combining text, pictures, sound, and video.",
+p:["Steps: <b>plan → storyboard → script → record/make → edit → share</b>.","A <b>storyboard</b> is a comic-like plan of each scene.","Every element must match the purpose and audience."],
+x:["A 1-minute ad: storyboard 5 scenes, add a voice-over, then music.","A slideshow with captions, photos, and a short sound clip."],
+m:"Plan on paper first, so you waste no time on screen!",
+q:[["A storyboard is…",["Sketches that plan scenes","The final video","A survey"],0,"It’s your scene-by-scene plan."],["Before filming you should…",["Plan and script","Publish","Skip editing"],0,"Planning prevents mistakes."],["All elements should…",["Match purpose and audience","Be random","Be extra loud"],0,"Everything supports the message."]]},
+{e:"🏆",c:"#65a30d",t:"Synthesis & Performance Tasks",b:"Synthesis means blending ideas from many sources into your own new idea.",
+p:["Read or view several sources, then connect their ideas.","Performance tasks (speech, report, ad, video) are graded with a <b>rubric</b>: content, organization, creativity, delivery.","Name your sources, stay on topic, practice, and revise."],
+x:["Combine an article, a chart, and an interview to explain why recycling matters.","Rubric check: Did I have an intro, evidence, and a conclusion?"],
+m:"Use your rubric like a checklist before you present.",
+q:[["Synthesis means…",["Copying one source","Combining ideas from many sources","Ignoring evidence"],1,"You blend sources into a new idea."],["Performance tasks are graded with a…",["Rubric","Coin flip","Guess"],0,"A rubric lists what is expected."],["Before presenting, you should…",["Practice and revise","Add random facts","Skip it"],0,"Practice makes it better."]]}
+];
+const M=document.getElementById('main'),H=document.getElementById('hi');
+let cur=0,tab='l',qs=[],an=[],stars=0,done={};
+const col=()=>cur<0?'#7c3aed':T[cur].c;
+function home(){cur=null;H.textContent="Tap a card to start learning!";
+M.innerHTML='<div class="grid"><button class="tc mix" data-i="-1"><i>🎲</i>Mixed Challenge<small>10 surprise questions</small></button>'+T.map((x,i)=>`<button class="tc" style="background:${x.c};animation-delay:${i*.05}s" data-i="${i}"><i>${x.e}</i>${x.t}<small>${done[i]?'⭐ Best: '+done[i]+'/3':'Learn + Quiz'}</small></button>`).join('')+'</div>'}
+function open(i){cur=i;tab=i<0?'q':'l';qs=i<0?T.flatMap(x=>x.q).sort(()=>Math.random()-.5).slice(0,10):T[i].q;an=qs.map(()=>null);R();scrollTo(0,0)}
+function R(){const t=T[cur]||{e:'🎲',t:'Mixed Challenge'};
+let h=`<div class="pg" style="--c:${col()}"><button class="bk" data-a="home">⬅ Back</button><h2>${t.e} ${t.t}</h2>`;
+if(cur>=0){h+=`<div class="big">${t.b}</div><div class="tabs"><button data-t="l" class="${tab=='l'?'on':''}">📖 Learn</button><button data-t="q" class="${tab=='q'?'on':''}">🎯 Quiz</button></div>`}
+if(tab=='l'){h+=(t.g||'')+'<h3>Key Ideas</h3>'+t.p.map((s,i)=>`<div class="pt" style="animation-delay:${i*.1}s">${s}</div>`).join('')+'<h3>Examples</h3>'+t.x.map((s,i)=>`<div class="ex" style="animation-delay:${i*.1}s">${s}</div>`).join('')+`<div class="tip">💡 <b>Memory trick:</b> ${t.m}</div><div class="tabs"><button class="on" data-t="q">Ready? Take the quiz! 🎯</button></div>`}
+else{h+=qs.map((q,i)=>`<div class="q"><p>${i+1}. ${q[0]}</p>`+q[1].map((o,j)=>{let c='';if(an[i]!=null){if(j==q[2])c='ok';else if(j==an[i])c='no'}return`<button class="o ${c}" data-q="${i}" data-o="${j}">${o}</button>`}).join('')+(an[i]!=null?`<div class="why">${an[i]==q[2]?'🎉 Great!':'💪 Nice try!'} ${q[3]}</div>`:'')+'</div>').join('');
+if(an.every(a=>a!=null)){const s=an.filter((a,i)=>a==qs[i][2]).length,r=s/qs.length;h+=`<div class="sc">${r==1?'🏆 Perfect!':r>=.6?'🌟 Great job!':'🌱 Keep practicing!'}<br>Score: ${s} / ${qs.length}<br><button data-a="re">Try again 🔁</button></div>`}}
+M.innerHTML=h+'</div>'}
+function conf(x,y){for(let i=0;i<8;i++){const s=document.createElement('span');s.className='cf';s.textContent=['⭐','🎉','✨','🌟'][i%4];s.style.left=(x+i*14-50)+'px';s.style.top=y+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),1400)}}
+M.onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+if(d.i!=null)open(+d.i);
+else if(d.a=='home')home();
+else if(d.a=='re')open(cur);
+else if(d.t){tab=d.t;R();scrollTo(0,0)}
+else if(d.q!=null){const i=+d.q;if(an[i]!=null)return;an[i]=+d.o;if(an[i]==qs[i][2]){stars++;document.getElementById('stars').textContent=stars;conf(e.clientX,e.clientY)}
+if(cur>=0&&an.every(a=>a!=null))done[cur]=Math.max(done[cur]||0,an.filter((a,k)=>a==qs[k][2]).length);R()}};
+document.getElementById('owl').onclick=()=>{H.textContent=['Hoo-ray! Keep going!','Read carefully, detective!','You are a super reader!'][Math.floor(Math.random()*3)]};
+home();
+</script></body></html>
